@@ -9,6 +9,22 @@ Jira is a **project & issue tracking tool** used by teams to:
 * Assign work to people
 * See progress over time
 
+| Action         | Owner | Maintainer | Member   | Viewer |
+| -------------- | ----- | ---------- | -------- | ------ |
+| View project   | ✅     | ✅          | ✅        | ✅      |
+| Create issue   | ✅     | ✅          | ✅        | ❌      |
+| Edit issue     | ✅     | ✅          | ⚠️        | ❌      |
+| Delete issue   | ✅     | ❌          | ❌        | ❌      |
+| Change status  | ✅     | ✅          | ⚠️        | ❌      |
+| Comment        | ✅     | ✅          | ✅        | ❌      |
+| Assign issues  | ✅     | ✅          | ❌        | ❌      |
+| Invite users   | ✅     | ⚠️          | ❌        | ❌      |
+| Change roles   | ✅     | ❌          | ❌        | ❌      |
+| Delete project | ✅     | ❌          | ❌        | ❌      |
+| Concpet Chart  | ✅     | ✅          | ❌        | ❌      |
+
+⚠️ = limited (e.g., only issues assigned to them)
+
 Companies use it for **Agile / Scrum / Kanban** workflows.
 
 ---
