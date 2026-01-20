@@ -1,11 +1,24 @@
 import React, { useEffect } from 'react'
 import { ReactFlow, Background, Controls, applyNodeChanges, applyEdgeChanges, addEdge } from '@xyflow/react'
 import { useState, useCallback } from 'react';
+import Dnd from './Droppable';
 import '@xyflow/react/dist/style.css';
+import { DndContext } from '@dnd-kit/core';
+
+import Draggable from './Draggable';
+import Droppable from './Droppable';
+import Header from './components/Header';
+import SideBar from './components/SideBar';
+import Stats from './pages/Stats';
 
 function App() {
 
-  
+  const [isDropped, setIsDropped] = useState(false);
+  const draggableMarkup = (
+    <Draggable>Drag me</Draggable>
+  );
+
+
   const initialNodes = [
     {
       id: 'n1',
@@ -52,41 +65,63 @@ function App() {
     const id = `n-${Date.now()}`
 
     setNodes((nodes) => [...nodes, {
-      id, 
+      id,
       // position: {x: Math.random() * 400, y: Math.random() * 400},
-      position: {x: nodes[nodes.length - 1].position.x + 10, y: nodes[nodes.length - 1].position.y + 10},
-      data: {label: `New Node`}
+      position: { x: nodes[nodes.length - 1].position.x + 10, y: nodes[nodes.length - 1].position.y + 10 },
+      data: { label: `New Node` }
     }])
   }
 
   useEffect(() => {
     console.log(nodes, edges)
   }, [])
-  
+
   const submitHandler = (e) => {
     e.preventDefault()
     console.log(nodes, edges)
-  } 
+  }
 
   return (
-    <form onSubmit={submitHandler} className='w-full h-screen p-10'>
-      <ReactFlow
-        className='border border-black rounded-md'
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        fitView
-      >
-        <Background />
-        <Controls />
-      </ReactFlow>
+    <>
+      <Header />
+      <div className='flex bg-(--bg-canvas)'>
+        <SideBar />
+        <main className="flex-1 overflow-y-auto bg-(--bg-canvas) p-6">
+          <Stats />
+        </main>
+      </div>
+    </>
+    // <form onSubmit={submitHandler} className='w-full h-screen p-10'>
+    //   <ReactFlow
+    //     className='border border-black rounded-md'
+    //     nodes={nodes}
+    //     edges={edges}
+    //     onNodesChange={onNodesChange}
+    //     onEdgesChange={onEdgesChange}
+    //     onConnect={onConnect}
+    //     fitView
+    //   >
+    //     <Background />
+    //     <Controls />
+    //   </ReactFlow>
 
-      <button onClick={addNote} type='button' className='p-10 rounded-md'>Add Node</button>
-      <button className='p-10 rounded-md' type='submit'>Save</button>
-    </form>
+    //   <button onClick={addNote} type='button' className='p-10 rounded-md'>Add Node</button>
+    //   <button className='p-10 rounded-md' type='submit'>Save</button>
+    // </form>
+
+    // <DndContext onDragEnd={handleDragEnd}>
+    //   {!isDropped ? draggableMarkup : null}
+    //   <Droppable>
+    //     {isDropped ? draggableMarkup : 'Drop here'}
+    //   </Droppable>
+    // </DndContext>
   )
+
+  function handleDragEnd(event) {
+    if (event.over && event.over.id === 'droppable') {
+      setIsDropped(true);
+    }
+  }
 }
 
 export default App
