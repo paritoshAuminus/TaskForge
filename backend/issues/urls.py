@@ -1,5 +1,3 @@
-from django.urls import path
+urlpatterns = []
 
-urlpatterns = [
-    # path('getissues/<int:pk>'),   get all/one issues 
-]
+
