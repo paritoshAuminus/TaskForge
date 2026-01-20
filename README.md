@@ -284,15 +284,3 @@ You can confidently say:
 That’s **mid-level backend engineer language**.
 
 ---
-
-## 4️⃣ Want next?
-
-I can:
-
-* Design **models & relationships**
-* Write **sample ViewSets**
-* Help you choose **Redis vs DB cache**
-* Turn this into **resume bullet points**
-* Do **mock interview questions based on this project**
-
-Just tell me what you want next 👌
